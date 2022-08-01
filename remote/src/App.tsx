@@ -1,6 +1,7 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import "./App.css";
+import { useState } from 'react';
+import reactLogo from './assets/react.svg';
+import './App.css';
+import { Link, Route, Routes } from 'react-router-dom';
 
 // function App() {
 //   const [count, setCount] = useState(0)
@@ -31,8 +32,29 @@ import "./App.css";
 //   )
 // }
 
+function Dummy({ name }: { name: string }) {
+  return <p>Remote: {name}</p>;
+}
+
 function App() {
-  return <h2>Remote App</h2>;
+  return (
+    <>
+      <h2>Remote App</h2>
+
+      {['', 'about'].map((path) => (
+        <>
+          <Link key={path} to={path}>
+            {path || 'home'}
+          </Link>{' '}
+        </>
+      ))}
+
+      <Routes>
+        <Route index element={<Dummy name="home" />} />
+        <Route path="about" element={<Dummy name="about" />} />
+      </Routes>
+    </>
+  );
 }
 
 export default App;
