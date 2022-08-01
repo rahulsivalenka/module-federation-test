@@ -1,8 +1,15 @@
-import { useState } from "react";
+import React, { useState, Suspense } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
 
-import RemoteApp from "remote/App";
+// import RemoteApp from "remote/App";
+// const RemoteApp = React.lazy(
+//   () =>
+//     new Promise((resolve) =>
+//       setTimeout(async () => resolve(await import("remote/App")), 5000)
+//     )
+// );
+const RemoteApp = React.lazy(() => import("remote/App"));
 
 function App() {
   const [count, setCount] = useState(0);
@@ -29,7 +36,9 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      <RemoteApp />
+      <Suspense fallback={<div>Remote Loading...</div>}>
+        <RemoteApp />
+      </Suspense>
     </div>
   );
 }
