@@ -1,8 +1,8 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import federation from "@originjs/vite-plugin-federation";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import federation from '@originjs/vite-plugin-federation';
 
-import pkg from "./package.json";
+import pkg from './package.json';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -13,32 +13,32 @@ export default defineConfig({
   plugins: [
     react(),
     federation({
-      name: "remote",
-      filename: "remoteEntry.js",
+      name: 'remote',
+      filename: 'remoteEntry.js',
       exposes: {
-        "./App": "./src/App.tsx",
+        './App': './src/App.tsx',
       },
       shared: {
         ...pkg.dependencies,
         react: {
           singleton: true,
-          requiredVersion: pkg.dependencies["react"],
+          requiredVersion: pkg.dependencies['react'],
         },
-        "react-dom": {
+        'react-dom': {
           singleton: true,
-          requiredVersion: pkg.dependencies["react-dom"],
+          requiredVersion: pkg.dependencies['react-dom'],
         },
       },
     }),
   ],
   build: {
-    target: "esnext",
-    minify: false,
-    cssCodeSplit: true,
-    rollupOptions: {
-      output: {
-        minifyInternalExports: false,
-      },
-    },
+    target: 'esnext',
+    // minify: false,
+    // cssCodeSplit: true,
+    // rollupOptions: {
+    //   output: {
+    //     minifyInternalExports: false,
+    //   },
+    // },
   },
 });
