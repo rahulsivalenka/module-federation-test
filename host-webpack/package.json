@@ -65,7 +65,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "preview": "serve -p 8083 ./build"
   },
   "eslintConfig": {
     "extends": [
@@ -140,5 +141,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "serve": "^14.0.1"
   }
 }
