@@ -184,7 +184,7 @@ module.exports = function (webpackEnv) {
   };
 
   return {
-    target: ['browserslist:last 2 versions'],
+    target: 'es2020',
     // Webpack noise constrained to errors and warnings
     stats: 'errors-warnings',
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
@@ -553,13 +553,13 @@ module.exports = function (webpackEnv) {
         shared: {
           ...pkg.dependencies,
           react: {
-            eager: true,
-            singleton: true,
+            // eager: true,
+            // singleton: true,
             requiredVersion: pkg.dependencies['react'],
           },
           'react-dom': {
-            eager: true,
-            singleton: true,
+            // eager: true,
+            // singleton: true,
             requiredVersion: pkg.dependencies['react-dom'],
           },
         },
@@ -570,6 +570,7 @@ module.exports = function (webpackEnv) {
           {},
           {
             inject: true,
+            scriptLoading: 'module',
             template: paths.appHtml,
           },
           isEnvProduction

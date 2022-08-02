@@ -21,11 +21,13 @@ export default defineConfig({
       shared: {
         ...pkg.dependencies,
         react: {
-          singleton: true,
+          // eager: true,
+          // singleton: true,
           requiredVersion: pkg.dependencies['react'],
         },
         'react-dom': {
-          singleton: true,
+          // eager: true,
+          // singleton: true,
           requiredVersion: pkg.dependencies['react-dom'],
         },
       },
