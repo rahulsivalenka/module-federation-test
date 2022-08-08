@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import './App.css';
 import { Link, Route, Routes } from 'react-router-dom';
@@ -42,11 +42,9 @@ function App() {
       <h2>Remote App</h2>
 
       {['', 'about'].map((path) => (
-        <>
-          <Link key={path} to={path}>
-            {path || 'home'}
-          </Link>{' '}
-        </>
+        <React.Fragment key={path}>
+          <Link to={path}>{path || 'home'}</Link>{' '}
+        </React.Fragment>
       ))}
 
       <Routes>

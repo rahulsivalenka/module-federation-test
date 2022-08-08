@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "dev:webpack": "webpack-dev-server --mode development --hot"
+    "dev:webpack": "webpack-dev-server --mode development --hot",
+    "build:webpack": "webpack --mode production"
   },
   "dependencies": {
     "react": "^18.2.0",

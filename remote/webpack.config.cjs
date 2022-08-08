@@ -1,17 +1,21 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { ModuleFederationPlugin } = require('webpack').container;
+const pkg = require('./package.json');
 
 module.exports = {
   mode: 'development',
-  entry: './src/main.tsx',
+  entry: './src/index.ts',
   devtool: 'inline-source-map',
   output: {
     path: path.join(__dirname, '/dist'),
-    filename: 'bundle.js',
+    uniqueName: 'remote',
+    filename: '[name].js',
   },
   devtool: 'inline-source-map',
   devServer: {
     static: './dist',
+    port: 3001,
   },
   module: {
     rules: [
@@ -48,6 +52,26 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   plugins: [
+    new ModuleFederationPlugin({
+      name: 'remote',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './App': './src/App',
+      },
+      shared: {
+        ...pkg.dependencies,
+        react: {
+          singleton: true,
+          eager: true,
+          requiredVersion: pkg.dependencies.react,
+        },
+        'react-dom': {
+          singleton: true,
+          eager: true,
+          requiredVersion: pkg.dependencies['react-dom'],
+        },
+      },
+    }),
     new HtmlWebpackPlugin({
       template: './index.html',
     }),

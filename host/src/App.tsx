@@ -10,7 +10,7 @@ import { Link, Route, Routes } from 'react-router-dom';
 //       setTimeout(async () => resolve(await import("remote/App")), 5000)
 //     )
 // );
-// const RemoteApp = React.lazy(() => import('remote/App'));
+const RemoteApp = React.lazy(() => import('remote/App'));
 
 function Dummy({ name }: { name: string }) {
   return <p>Host: {name}</p>;
@@ -39,11 +39,9 @@ function App() {
       <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
 
       {['', 'about', 'remote'].map((path) => (
-        <>
-          <Link key={path} to={path}>
-            {path || 'home'}
-          </Link>{' '}
-        </>
+        <React.Fragment key={path}>
+          <Link to={path}>{path || 'home'}</Link>{' '}
+        </React.Fragment>
       ))}
 
       <Routes>
@@ -53,8 +51,7 @@ function App() {
           path="remote/*"
           element={
             <Suspense fallback={<div>Remote Loading...</div>}>
-              {/* <RemoteApp /> */}
-              <div />
+              <RemoteApp />
             </Suspense>
           }
         />
