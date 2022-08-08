@@ -10,7 +10,7 @@ import { Link, Route, Routes } from 'react-router-dom';
 //       setTimeout(async () => resolve(await import("remote/App")), 5000)
 //     )
 // );
-const RemoteApp = React.lazy(() => import('remote/App'));
+// const RemoteApp = React.lazy(() => import('remote/App'));
 
 function Dummy({ name }: { name: string }) {
   return <p>Host: {name}</p>;
@@ -53,7 +53,8 @@ function App() {
           path="remote/*"
           element={
             <Suspense fallback={<div>Remote Loading...</div>}>
-              <RemoteApp />
+              {/* <RemoteApp /> */}
+              <div />
             </Suspense>
           }
         />
